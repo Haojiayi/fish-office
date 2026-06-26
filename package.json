@@ -1,0 +1,10 @@
+{
+  "name": "fish-office",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/pet-engine.test.mjs && node tests/patrol-engine.test.mjs && node tests/room-engine.test.mjs"
+  }
+}
