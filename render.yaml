@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fish-office
+    env: node
+    plan: free
+    buildCommand: ""
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
