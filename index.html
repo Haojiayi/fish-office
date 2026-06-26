@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>摸鱼协作台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" data-mode="office">
+      <aside class="sidebar" aria-label="主导航">
+        <div class="brand">
+          <span class="brand-mark">MO</span>
+          <div>
+            <strong>摸鱼协作台</strong>
+            <small>Internal Ops</small>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" type="button">总览</button>
+          <button class="nav-item" type="button">项目</button>
+          <button class="nav-item" type="button">会议</button>
+          <button class="nav-item" type="button">报表</button>
+        </nav>
+        <section class="stealth-panel">
+          <span class="label">房间暗号</span>
+          <input class="room-input" id="roomCodeInput" maxlength="16" value="FISH-404" />
+          <strong id="roomCode">FISH-404</strong>
+          <small id="connectionState">单机模式</small>
+          <button class="ghost-button" id="copyRoom" type="button">复制伪装邀请</button>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">运营效率监控中心</p>
+            <h1>今日协同驾驶舱</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="identity-field">
+              <span>我的代号</span>
+              <input id="nickname" maxlength="12" autocomplete="off" placeholder="匿名同事" />
+            </label>
+            <label class="identity-field">
+              <span>伪装状态</span>
+              <select id="statusSelect">
+                <option value="写方案中">写方案中</option>
+                <option value="开会中">开会中</option>
+                <option value="等编译">等编译</option>
+                <option value="排查线上问题">排查线上问题</option>
+                <option value="整理纪要">整理纪要</option>
+              </select>
+            </label>
+            <button class="danger-button" id="bossKey" type="button">老板键</button>
+          </div>
+        </header>
+
+        <section class="boss-report" id="bossReport" aria-live="polite">
+          <div>
+            <p class="eyebrow">Q2 Business Review</p>
+            <h2>跨部门效能复盘</h2>
+          </div>
+          <div class="report-grid">
+            <article>
+              <span>战略对齐率</span>
+              <strong>98.6%</strong>
+              <small>环比提升 12.4%</small>
+            </article>
+            <article>
+              <span>会议闭环数</span>
+              <strong>37</strong>
+              <small>全部进入同步中</small>
+            </article>
+            <article>
+              <span>风险敞口</span>
+              <strong>低</strong>
+              <small>暂无需升级事项</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="dashboard" id="officeView">
+          <section class="metrics-row" aria-label="摸鱼指标">
+            <article class="metric-card">
+              <span>专注表演指数</span>
+              <strong id="focusScore">87</strong>
+              <small>看起来非常忙</small>
+            </article>
+            <article class="metric-card accent-cyan">
+              <span>安全摸鱼窗口</span>
+              <strong id="safeWindow">18m</strong>
+              <small>老板在 3 个频道外</small>
+            </article>
+            <article class="metric-card accent-gold">
+              <span>群体默契值</span>
+              <strong id="vibeScore">73</strong>
+              <small>暗号识别顺畅</small>
+            </article>
+            <article class="metric-card accent-red">
+              <span>假装推进任务</span>
+              <strong id="taskScore">12</strong>
+              <small>本日持续更新</small>
+            </article>
+          </section>
+
+          <section class="main-grid">
+            <article class="panel board-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Project Delivery</p>
+                  <h2>任务看板</h2>
+                </div>
+                <button class="primary-button" id="fishButton" type="button">一键摸鱼</button>
+              </div>
+              <div class="kanban" id="kanbanBoard"></div>
+            </article>
+
+            <article class="panel office-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Presence</p>
+                  <h2>工位宠物</h2>
+                </div>
+                <span class="pulse">Live</span>
+              </div>
+              <div class="office-map" aria-label="办公室平面图">
+                <span class="desk desk-a">A1</span>
+                <span class="desk desk-b">B2</span>
+                <span class="desk desk-c">C3</span>
+                <span class="desk desk-d">D4</span>
+                <span class="coffee">茶水间</span>
+              </div>
+              <div class="pet-list" id="petList"></div>
+            </article>
+
+            <article class="panel patrol-panel" id="patrolPanel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Risk Control</p>
+                  <h2>老板巡视</h2>
+                </div>
+                <span class="risk-badge" id="patrolPhase">低风险</span>
+              </div>
+              <div class="patrol-meter">
+                <div>
+                  <span>下次巡视</span>
+                  <strong id="patrolCountdown">42s</strong>
+                </div>
+                <div>
+                  <span>暴露风险</span>
+                  <strong id="patrolRisk">18%</strong>
+                </div>
+              </div>
+              <div class="patrol-track" aria-hidden="true">
+                <span id="patrolDot"></span>
+              </div>
+              <p class="patrol-notice" id="patrolNotice">老板暂未靠近，维持低调摸鱼。</p>
+              <button class="panic-button" id="panicButton" type="button">应急伪装</button>
+            </article>
+
+            <article class="panel chat-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Meeting Notes</p>
+                  <h2>会议纪要流</h2>
+                </div>
+                <span class="quiet-badge">低调模式</span>
+              </div>
+              <div class="message-list" id="messageList" aria-live="polite"></div>
+              <form class="message-form" id="messageForm">
+                <input id="messageInput" maxlength="80" autocomplete="off" placeholder="输入暗号，比如：咖啡机需要维护" />
+                <button class="primary-button" type="submit">同步</button>
+              </form>
+            </article>
+
+            <article class="panel activity-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Audit Trail</p>
+                  <h2>合规活动日志</h2>
+                </div>
+              </div>
+              <ul class="activity-list" id="activityList"></ul>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
